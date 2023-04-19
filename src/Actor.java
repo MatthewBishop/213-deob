@@ -323,6 +323,7 @@ public abstract class Actor extends Renderable {
 
     }
 
+    //new feature in 213.
     void updateGraphic(int idx, int graphicID, int graphicHeight, int graphicStartCycle) {
         int startCycle = graphicStartCycle + Client.cycle;
         Graphic graphic = (Graphic) this.graphics.get((long) idx);
@@ -367,8 +368,8 @@ public abstract class Actor extends Renderable {
             byte var6 = var1.field2152;
 
             for (Graphic var7 = (Graphic) var2.method2390(); var7 != null; var7 = (Graphic) var2.next()) {
-                if (var7.field4169 != -1) {
-                    Model var8 = ItemContainer.SpotAnimationDefinition_get(var7.field4170).method1042();
+                if (var7.spotAnimationFrame != -1) {
+                    Model var8 = ItemContainer.SpotAnimationDefinition_get(var7.spotAnimation).method1042();
                     if (var8 != null) {
                         var3 += var8.verticesCount;
                         var4 += var8.indicesCount;
@@ -381,10 +382,10 @@ public abstract class Actor extends Renderable {
             var10.method1342(var1);
 
             for (Graphic var11 = (Graphic) var2.method2390(); var11 != null; var11 = (Graphic) var2.next()) {
-                if (var11.field4169 != -1) {
-                    Model var9 = ItemContainer.SpotAnimationDefinition_get(var11.field4170).getModel(var11.field4169);
+                if (var11.spotAnimationFrame != -1) {
+                    Model var9 = ItemContainer.SpotAnimationDefinition_get(var11.spotAnimation).getModel(var11.spotAnimationFrame);
                     if (var9 != null) {
-                        var9.offsetBy(0, -var11.field4172, 0);
+                        var9.offsetBy(0, -var11.spotAnimHeight, 0);
                         var10.method1342(var9);
                     }
                 }

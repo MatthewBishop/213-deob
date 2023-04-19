@@ -483,39 +483,39 @@ public class NetFileRequest extends DualNode {
         IterableNodeHashTableIterator var7 = new IterableNodeHashTableIterator(var0.method532());
 
         int var3;
-        for (Graphic var6 = (Graphic) var7.method2390(); var6 != null; var6 = (Graphic) var7.next()) {
-            if (var6.field4170 != -1 && Client.cycle >= var6.field4171) {
-                var3 = ItemContainer.SpotAnimationDefinition_get(var6.field4170).sequence;
+        for (Graphic graphic = (Graphic) var7.method2390(); graphic != null; graphic = (Graphic) var7.next()) {
+            if (graphic.spotAnimation != -1 && Client.cycle >= graphic.spotAnimationStartCycle) {
+                var3 = ItemContainer.SpotAnimationDefinition_get(graphic.spotAnimation).sequence;
                 if (var3 == -1) {
-                    var6.remove();
+                    graphic.remove();
                     --var0.graphicsCount;
                 } else {
-                    var6.field4169 = Math.max(var6.field4169, 0);
+                    graphic.spotAnimationFrame = Math.max(graphic.spotAnimationFrame, 0);
                     SequenceDefinition var4 = ItemContainer.SequenceDefinition_get(var3);
                     if (var4.frameIds != null && !var4.isCachedModelIdSet()) {
-                        ++var6.field4168;
-                        if (var6.field4169 < var4.frameIds.length
-                                && var6.field4168 > var4.frameLengths[var6.field4169]) {
-                            var6.field4168 = 1;
-                            ++var6.field4169;
-                            ZoneOperation.method1599(var4, var6.field4169, var0.x, var0.y);
+                        ++graphic.spotAnimFrameCycle;
+                        if (graphic.spotAnimationFrame < var4.frameIds.length
+                                && graphic.spotAnimFrameCycle > var4.frameLengths[graphic.spotAnimationFrame]) {
+                            graphic.spotAnimFrameCycle = 1;
+                            ++graphic.spotAnimationFrame;
+                            ZoneOperation.method1599(var4, graphic.spotAnimationFrame, var0.x, var0.y);
                         }
 
-                        if (var6.field4169 >= var4.frameIds.length) {
-                            var6.remove();
+                        if (graphic.spotAnimationFrame >= var4.frameIds.length) {
+                            graphic.remove();
                             --var0.graphicsCount;
                         }
                     } else if (var4.isCachedModelIdSet()) {
-                        ++var6.field4169;
+                        ++graphic.spotAnimationFrame;
                         int var5 = var4.method1128();
-                        if (var6.field4169 < var5) {
-                            KeyHandler.method108(var4, var6.field4169, var0.x, var0.y);
+                        if (graphic.spotAnimationFrame < var5) {
+                            KeyHandler.method108(var4, graphic.spotAnimationFrame, var0.x, var0.y);
                         } else {
-                            var6.remove();
+                            graphic.remove();
                             --var0.graphicsCount;
                         }
                     } else {
-                        var6.remove();
+                        graphic.remove();
                         --var0.graphicsCount;
                     }
                 }
